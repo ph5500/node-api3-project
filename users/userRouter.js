@@ -5,7 +5,7 @@ const Posts = require("../posts/postDB.js");
 
 const router = express.Router();
 
-router.post('/', validateUser, (req, res) => {
+router.post("/", validateUser, (req, res) => {
   Users.insert(req.body)
     .then(user => {
       res.status(201).json(user);
@@ -18,7 +18,7 @@ router.post('/', validateUser, (req, res) => {
     });
 });
 
-router.post('/:id/posts', validatePost, (req, res) => {
+router.post("/:id/posts", validatePost, (req, res) => {
   const { id } = req.user;
   const post = { ...req.body, user_id: id }
 
@@ -67,7 +67,7 @@ router.get("/:id", validateUserId, (req, res) => {
     });
 });
 
-router.get('/:id/posts', validateUserId, (req, res) => {
+router.get("/:id/posts", validateUserId, (req, res) => {
   Users.getUserPosts(req.user.id)
     .then(posts => {
       if (posts.length > 0) {
@@ -86,7 +86,7 @@ router.get('/:id/posts', validateUserId, (req, res) => {
     });
 });
 
-router.delete('/:id', validateUserId, (req, res) => {
+router.delete("/:id", validateUserId, (req, res) => {
   Users.remove(req.user.id)
     .then(user => {
       if (user) {
@@ -105,7 +105,7 @@ router.delete('/:id', validateUserId, (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   if (!req.body.name) {
     res.status(400).json({ errorMessage: "Please provide a name for the user." });
   } else {
@@ -183,7 +183,7 @@ module.exports = router;
 // const express = require('express');
 // const path = require('path');
 
-const server = express();
+// const server = express();
 
 //global middleware
 // server.use(express.json());
